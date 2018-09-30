@@ -1,0 +1,30 @@
+{
+  "name": "mongo-scrapper",
+  "version": "1.0.0",
+  "description": "MongoDB Scrapper App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/docvvk/mongo-scrapper.git"
+  },
+  "keywords": [
+    "mongojs",
+    "mongoose",
+    "cheerio",
+    "morgan",
+    "express"
+  ],
+  "author": "Vivek Malhan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/docvvk/mongo-scrapper/issues"
+  },
+  "homepage": "https://github.com/docvvk/mongo-scrapper#readme",
+  "dependencies": {
+    "npm": "^6.4.1"
+  }
+}
