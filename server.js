@@ -27,6 +27,7 @@ if(process.env.MONGODB_URI) {
 } else {
     mongoose.connect(dbConnect);
 }
+//mongodb://<dbuser>:<dbpassword>@ds223343.mlab.com:23343/heroku_f97x46bw
 // mongodb://foxsScrape:password12@ds119585.mlab.com:19585/heroku_hd8909ql;
 // Connect mongoose to our database
 /* mongoose.connect(dbConnect, function (error) {
