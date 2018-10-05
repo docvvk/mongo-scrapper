@@ -1,24 +1,24 @@
 // Require mongoose
-var mongoose = require('mongoose');
-
-// Create schema class
+var mongoose = require("mongoose");
+// Create a schema class
 var Schema = mongoose.Schema;
 
 // Create the Note schema
 var NoteSchema = new Schema({
-    article_is: {
-        type: Schema.Types.ObjectId
-    },
-    body: {
-        type: String
-    }
+  // Just a string
+  article_id: {
+    type: Schema.Types.ObjectId
+  },
+  body: {
+    type: String
+  }
 });
 
-// Mongoose will automatically save the objectIDs of notes as reffered in Articles model
+// Remember, Mongoose will automatically save the ObjectIds of the notes
+// These ids are referred to in the Article model
 
-// Create Note model with NoteSchema
+// Create the Note model with the NoteSchema
 var Note = mongoose.model("Note", NoteSchema);
 
 // Export the Note model
 module.exports = Note;
-

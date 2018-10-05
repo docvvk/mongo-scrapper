@@ -1,26 +1,24 @@
-//============== DEPENDENCIES ===============//
-var cheerio = require('cheerio');
-var request = require('request');
-
-//============== MODELS / SCHEMAS ===============//
+// require the dependencies
+var cheerio = require("cheerio");
+var request = require("request");
+// require the models
 var Note = require("../models/Note.js");
 var Article = require("../models/Article.js");
 var Save = require("../models/Save");
 
-module.exports = function (app) { 
-    app.get("/scrape", function(req, res) {
-        request("https://www.nytimes.com/", function (error, response, html) { 
-            // Load the html into cheerio and save it into a variable
-            // '$' becomes shorthand for cheerio's selector command much like jQuery $
+module.exports = function (app) {
+    app.get("/scrape", function (req, res) {
+        request("https://www.nytimes.com/", function (error, response, html) {
+
+            // Load the HTML into cheerio and save it to a variable
+            // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
             var $ = cheerio.load(html);
 
-            // $("article.css-180b3ld").each(function(i, element) {
-            //     var result = {};
+            // An empty array to save the data that we'll scrape
 
-            //     result.summary = $(element).children("ul.css-1vwlksu").text();
-            //     result.byline = $(element).children("span.css-1c9nvf").text();
-            //     result.title = $(element).children("h2.css-8uvv5f").text();
-            //     result.link = $(element).children("a").attr("href");
+            // Select each element in the HTML body from which you want information.
+            // NOTE: Cheerio selectors function similarly to jQuery's selectors,
+            // but be sure to visit the package's npm page to see how it works
 
             $("article.story").each(function (i, element) {
                 var result = {};
@@ -30,70 +28,68 @@ module.exports = function (app) {
                 result.byline = $(element).children("p.byline").text();
                 result.title = $(element).children("h2").text();
                 result.link = $(element).children("h2").children("a").attr("href");
-
-
+                // Save these results in an object that we'll push into the results array we defined earlier
                 if (result.title && result.link) {
                     var entry = new Article(result);
-
+                    // Now, save that entry to the db
                     Article.update(
                         {link: result.link},
                         result,
-                        {upsert: true},
-                        function (error, doc) {
+                        { upsert: true },
+                        function (error, doc){
                             if (error) {
                                 console.log(error);
                             }
                         }
-                    )
+                    );
                 }
             });
             res.json({"code" : "success"});
-         });
+            // res.json(true);
+        });
     });
 
+    // Get route for  all the articles
+    app.get("/articles", function (req, res) {
+        Article.find({}, function (error, doc) {
+            if (error) {
+                console.log(error);
+            } else {
+                res.send(doc);
+            }
+        });
+    });
+    // Get route for  all the articles with the id
+    app.get("/articles/:id", function (req, res) {
+        Article.find({
+                "_id": req.params.id
+            })
+            .populate("note")
+            .exec(function (error, doc) {
+                if (error) {
+                    console.log(error)
+                } else {
+                    res.send(doc);
+                }
+            });
+    });
 
- // Get route for all the articles
- app.get("/articles", function (req, res) { 
-     Article.find({}, function (error, doc) { 
-         if (error) {
-             console.log(error);
-         } else {
-             res.send(doc);
-         }
-      });
-  });
+    // get route to return all saved articles
+    app.get("/saved/all", function (req, res) {
+        Save.find({})
+            .populate("note")
+            .exec(function (error, data) {
+                if (error) {
+                    console.log(error);
+                    res.json({"code" : "error"});
+                } else {
+                    res.json(data);
+                }
+            });
+    });
 
-// Get route for all the articles with the id
-app.get("/articles/:id", function (req, res) {
-    Article.find({
-        "_id": req.params.id
-    })
-    .populate("note")
-    .exec(function (error, doc) { 
-        if (error) {
-            console.log(error)
-        } else {
-            res.send(doc);
-        }
-     });
-});
-
-// Get route to return all saved articles
-app.get("/saved/all", function (req, res) { 
-    Save.find({})
-    .populate("note")
-    .exec(function (error, data) { 
-        if (error) {
-            console.log(error);
-            res.join({"code" : "error"})
-        } else {
-            res.json(data)
-        }
-     });
- });
-
-     // post route to save the article
-     app.post("/save", function (req, res) {
+    // post route to save the article
+    app.post("/save", function (req, res) {
         var result = {};
         result.id = req.body._id;
         result.summary = req.body.summary;
