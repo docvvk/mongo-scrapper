@@ -134,6 +134,25 @@ router.post("/comment/:id", function(req, res) {
   });
 });
 
+// Delete the saved article
+router.delete("/delete", function (req, res) {
+  var result = {};
+  result._id = req.body._id;
+  Save.findOneAndRemove({
+      '_id': req.body._id
+  }, function (err, doc) {
+      // Log any errors
+      if (err) {
+          console.log("error:", err);
+          res.json(err);
+      }
+      // Or log the doc
+      else {
+          res.json(doc);
+      }
+  });
+});
+
 // Remove a saved article
 router.post("/unsave/:id", function(req, res) {
   // Use the article id to find and update it's saved property to false

@@ -89,6 +89,9 @@ section.section {
 	min-height: 100%;
 	background-color: antiquewhite;
 }
+.title {
+	padding: 20px;
+}
 
 div.container {
 	min-height: 100%;

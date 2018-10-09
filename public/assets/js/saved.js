@@ -49,6 +49,26 @@ $(document).ready(function() {
 	  });
 	});
 
+// When click on delete article button
+// $(document).on('click', '.unsave-button', function () {
+// 	var thisId = $(this).attr("id");
+// 	// var title = $("#title-" + thisId).text();
+// 	// var byline = $("#byline-" + thisId).text();
+// 	var data = {
+// 			"_id": thisId
+// 	};
+// 	$.ajax({
+// 			type: "DELETE",
+// 			url: "/delete",
+// 			data: data,
+// 			success: function (data, textStatus) {
+// 					$(".saved-div").remove();
+// 			}
+// 	})
+// });
+
+
+
 	// Modal X button closes modal and removes comments
 	$(document).on("click", ".delete", function() {
 		$(".modal").toggleClass("is-active");
