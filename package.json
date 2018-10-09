@@ -1,7 +1,7 @@
 {
-  "name": "mongo-scrapper",
+  "name": "news-scraper",
   "version": "1.0.0",
-  "description": "MongoDB Scrapper App",
+  "description": "mongodb",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,32 +9,27 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/docvvk/mongo-scrapper.git"
+    "url": "git+https://github.com/docvvk/news-scraper.git"
   },
   "keywords": [
-    "mongojs",
+    "mongodb",
     "mongoose",
-    "cheerio",
-    "morgan",
-    "express"
+    "nodejs",
+    "handlebars",
+    "scraping-websites"
   ],
   "author": "Vivek Malhan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/docvvk/mongo-scrapper/issues"
+    "url": "https://github.com/docvvk/news-scraper/issues"
   },
-  "homepage": "https://github.com/docvvk/mongo-scrapper#readme",
+  "homepage": "https://github.com/docvvk/news-scraper#readme",
   "dependencies": {
-    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
-    "mongojs": "^2.6.0",
-    "mongoose": "^5.3.0",
-    "morgan": "^1.9.1",
-    "npm": "^6.4.1",
-    "path": "^0.12.7",
+    "mongoose": "^5.3.2",
     "request": "^2.88.0"
   }
 }

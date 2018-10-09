@@ -8,24 +8,26 @@ var ArticleSchema = new Schema({
   // title is a required string
   title: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
-  // link is a required string
-  link: {
+  // description is a required string
+  description: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
-  summary: {
-    type: String,
+  // boolean to flag articles as saved
+  saved: {
+    type: Boolean,
+    required: true,
+    default: false
   },
-   byline: {
-   type: String,
-  },
-  // This only saves one note's ObjectId, ref refers to the Note model
-  note: [{
-    type: Schema.Types.ObjectId,
-    ref: "Note"
-  }]
+  // This will save an array of comments' ObjectIds
+  comments:[{
+        type: Schema.ObjectId,
+        ref:'Comment'
+    }]
 });
 
 // Create the Article model with the ArticleSchema
