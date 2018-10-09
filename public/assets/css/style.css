@@ -3,23 +3,31 @@
 }
 
 a {
-	color: #23A6D5;
+	color: rgb(37, 40, 245);
 }
 
 button {
-	background-color: #E73C7E !important;
+	background-color: rgba(12, 15, 0, 0.459) !important;
+}
+
+a.button.is-primary {
+	background-color: rgba(12, 15, 0, 0.459);
 }
 
 a#home, a.home, a#saved, a.saved {
-	color: #23A6D5;
+	color: rgb(37, 40, 245);
 	
 }
 
 marquee {
 	padding: 5px;
-	background-color: #23A6D5;
+	background-color: rgba(0, 0, 0, 0.308);
 	color: #fff;
 
+}
+
+#navMenu {
+	background-color: antiquewhite;
 }
 
 .dropdown {
@@ -79,6 +87,7 @@ marquee {
 section.section {
 	padding-bottom: 0;
 	min-height: 100%;
+	background-color: antiquewhite;
 }
 
 div.container {
