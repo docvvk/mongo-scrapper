@@ -46,15 +46,6 @@ heroku addons:create mongolab
 
 Now your project should be successfully deployed on heroku.
 
-## Screenshots
-
-**Article search home screen**
-
-![screenshot-1](./screenshots/firstpage.JPG)
-
-**Article comments modal**
-
-![screenshot-2](./screenshots/secondpage.JPG)
 
 ## Future Updates
 
